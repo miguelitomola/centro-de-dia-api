@@ -1,7 +1,4 @@
 services:
-  # =====================================================
-  # Servicio 1: La aplicacion Spring Boot (pizzeria)
-  # =====================================================
   app:
     build: .
     ports:
@@ -20,9 +17,6 @@ services:
         condition: service_healthy
     restart: on-failure
 
-  # =====================================================
-  # Servicio 2: Base de datos PostgreSQL
-  # =====================================================
   db:
     image: postgres:16-alpine
     environment:
@@ -39,9 +33,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # =====================================================
-  # Servicio 3: Adminer (panel web para ver la BD)
-  # =====================================================
   adminer:
     image: adminer
     ports:
@@ -50,8 +41,5 @@ services:
       db:
         condition: service_healthy
 
-# =======================================================
-# Volumenes (para que los datos persistan)
-# =======================================================
 volumes:
   postgres_data:
