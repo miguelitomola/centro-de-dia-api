@@ -34,3 +34,10 @@ INSERT INTO users_relatives (user_id, relative_id) VALUES (1, 2);
 INSERT INTO users_relatives (user_id, relative_id) VALUES (2, 3);
 INSERT INTO users_relatives (user_id, relative_id) VALUES (3, 3);
 INSERT INTO users_relatives (user_id, relative_id) VALUES (4, 4);
+
+-- Reset sequences for tables with IDENTITY columns
+ALTER TABLE users ALTER COLUMN id RESTART WITH 5;
+ALTER TABLE relatives ALTER COLUMN id RESTART WITH 5;
+ALTER TABLE centre_responsibles ALTER COLUMN id RESTART WITH 5;
+ALTER TABLE metrics ALTER COLUMN id RESTART WITH 5;
+ALTER TABLE journal_pages ALTER COLUMN id RESTART WITH 5;
