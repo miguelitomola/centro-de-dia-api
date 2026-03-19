@@ -1,10 +1,4 @@
-# centro-de-dia-api
-"Centro de día API" connects day centers for seniors with the families of seniors.
-
-# Day Center API — [Miguel Ángel Montero Lázaro]
-
-## Chosen Blueprint
-Day Center
+# Centro de día API
 
 ## Description
 API to manage information about users of a senior day center.
@@ -27,6 +21,56 @@ The other two entities handle two pieces of information about the center users:
 | CentreResponsible | `firstName`, `lastName`, `idNumber` | |
 | JournalPage | `date`, `breakfast`, `lunch`, `afternoonSnack`, `urination`, `defecation`, `centreComment`, `relativesComment` | ManyToOne with `User`, ManyToOne with `CentreResponsible` |
 | Metric | `dateTime`, `metricCategory`, `value` | ManyToOne with `User`, ManyToOne with `CentreResponsible` |
+
+```mermaid
+erDiagram
+    RELATIVES {
+        Long id PK
+        String firstName
+        String lastName
+        String idNumber
+    }
+
+    USERS {
+        Long id PK
+        String firstName
+        String lastName
+        String idNumber
+    }
+
+    CENTRE_RESPONSIBLES {
+        Long id PK
+        String firstName
+        String lastName
+        String idNumber
+    }
+
+    JOURNAL_PAGES {
+        Long id PK
+		LocalDate date
+        MealStatus breakfast
+        MealStatus lunch
+        MealStatus afternoonSnack
+        Boolean urination
+        Boolean defecation
+        String centreComment
+        String relativesComment
+    }
+
+    METRICS {
+        Long id PK
+		LocalDateTime datetime
+        MetricCategory category
+        Double value
+    }
+
+    RELATIVES ||--o{ USERS : "has"
+    USERS ||--o{ JOURNAL_PAGES : "has"
+    USERS ||--o{ METRICS : "has"
+    CENTRE_RESPONSIBLES ||--o{ JOURNAL_PAGES : "writes"
+    CENTRE_RESPONSIBLES ||--o{ METRICS : "records"
+    USERS ||--o{ RELATIVES : "relation to"
+```
 
 ## API Endpoints
 
